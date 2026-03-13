@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { useStore } from '../store';
-import metronomeSFX from '/metronome.mp3';
+const metronomeSFX = `${import.meta.env.BASE_URL}metronome.mp3`;
 
 export default function Metronome() {
   const { state, dispatch, patterns, currentPatternInfo } = useStore();
