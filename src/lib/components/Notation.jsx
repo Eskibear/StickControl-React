@@ -5,8 +5,10 @@ import { patternToStave } from '../patterns/patternToStave';
 import NotationLetters from './NotationLetters';
 
 export default function Notation() {
-  const { state, patterns, currentPatternInfo } = useStore();
-  const { counter, currentPattern, reps, timer } = state;
+  const { state, patterns, categories, currentPatternInfo } = useStore();
+  const { counter, currentPattern, category, reps, timer } = state;
+  const categoryInfo = categories.find(c => c.id === category);
+  const displayNum = currentPattern - categoryInfo.start + 1;
   const outputRef = useRef(null);
   const [noteXPositions, setNoteXPositions] = useState([]);
 
@@ -70,7 +72,7 @@ export default function Notation() {
       </div>
       <div className="flex items-center justify-center">
         <p className="translate-y-2 text-2xl mr-4">
-          {currentPattern < 9 ? '0' : ''}{currentPattern + 1}
+          {displayNum < 10 ? '0' : ''}{displayNum}
         </p>
         <div className="text-center output relative" ref={outputRef}>
           <NotationLetters

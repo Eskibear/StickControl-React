@@ -5,15 +5,17 @@ import { patternToStave } from '../patterns/patternToStave';
 import NotationLetters from './NotationLetters';
 
 export default function NotationPreview() {
-  const { state, patterns, currentPatternInfo } = useStore();
-  const { counter, currentPattern, reps, timer } = state;
+  const { state, patterns, categories, currentPatternInfo } = useStore();
+  const { counter, currentPattern, category, reps, timer } = state;
+  const categoryInfo = categories.find(c => c.id === category);
+  const categoryEnd = categoryInfo.start + categoryInfo.count - 1;
   const outputRef = useRef(null);
   const [noteXPositions, setNoteXPositions] = useState([]);
 
   const drawNotes = useCallback(() => {
     const output = outputRef.current;
     if (!output) return;
-    if (currentPattern >= patterns.length - 1) return;
+    if (currentPattern >= categoryEnd) return;
 
     // Remove previous VexFlow SVGs
     output.querySelectorAll(':scope > svg').forEach(el => el.remove());
@@ -49,13 +51,15 @@ export default function NotationPreview() {
       ...measures[0].allNotes.map(n => n.getAbsoluteX()),
       ...measures[1].allNotes.map(n => n.getAbsoluteX()),
     ]);
-  }, [currentPattern, patterns]);
+  }, [currentPattern, patterns, categoryEnd]);
 
   useEffect(() => {
     drawNotes();
   }, [drawNotes]);
 
-  if (currentPattern >= patterns.length - 1) return null;
+  if (currentPattern >= categoryEnd) return null;
+
+  const nextDisplayNum = currentPattern - categoryInfo.start + 2;
 
   const previewClass =
     (reps.selected && counter > (reps.count - 1) * currentPatternInfo.totalNotes) ||
@@ -68,7 +72,7 @@ export default function NotationPreview() {
       className={`flex items-center justify-center mt-8 transition-all ${previewClass}`}
     >
       <p className="translate-y-2 text-2xl mr-4">
-        {currentPattern < 8 ? '0' : ''}{currentPattern + 2}
+        {nextDisplayNum < 10 ? '0' : ''}{nextDisplayNum}
       </p>
       <div className="text-center output-prev relative" ref={outputRef}>
         <NotationLetters
