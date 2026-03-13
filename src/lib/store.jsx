@@ -1,13 +1,15 @@
 import { createContext, useContext, useReducer, useMemo } from 'react';
 import allPatterns from './patterns/patterns';
 import tripletPatterns from './patterns/triplets';
+import tripletPlusPatterns from './patterns/tripletsPlus';
 import { getPatternInfo } from './patterns/patternUtils';
 
-const patterns = [...allPatterns, ...tripletPatterns];
+const patterns = [...allPatterns, ...tripletPatterns, ...tripletPlusPatterns];
 
 const categories = [
   { id: 'single', label: 'Single Beat Combinations', start: 0, count: allPatterns.length },
   { id: 'triplets', label: 'Triplets', start: allPatterns.length, count: tripletPatterns.length },
+  { id: 'tripletsPlus', label: 'Triplets+', start: allPatterns.length + tripletPatterns.length, count: tripletPlusPatterns.length },
 ];
 
 const initialState = {
