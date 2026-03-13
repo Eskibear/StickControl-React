@@ -12,7 +12,17 @@ export default function Footer() {
         >
           Drum icons created by Freepik - Flaticon
         </a>
-        <p className="pl-2 min-[456px]:border-l border-gray-300">© 2023 Leo Cheng</p>
+        <p className="pl-2 min-[456px]:border-l border-gray-300">
+          Based on{' '}
+          <a
+            className="text-blue-500 hover:text-blue-700"
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/cptleo92/StickControl"
+          >
+            cptleo92/StickControl
+          </a>
+        </p>
       </div>
     </footer>
   );
