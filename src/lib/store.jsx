@@ -5,9 +5,15 @@ import { getPatternInfo } from './patterns/patternUtils';
 
 const patterns = [...allPatterns, ...tripletPatterns];
 
+const categories = [
+  { id: 'single', label: 'Single Beat Combinations', start: 0, count: allPatterns.length },
+  { id: 'triplets', label: 'Triplets', start: allPatterns.length, count: tripletPatterns.length },
+];
+
 const initialState = {
   counter: 0,
   currentPattern: 0,
+  category: 'single',
   reps: { count: 20, selected: true },
   timer: { startSeconds: 60, currentSeconds: 60, selected: false },
 };
@@ -20,6 +26,8 @@ function reducer(state, action) {
       return { ...state, counter: state.counter + 1 };
     case 'SET_CURRENT_PATTERN':
       return { ...state, currentPattern: action.value };
+    case 'SET_CATEGORY':
+      return { ...state, category: action.value };
     case 'SET_REPS':
       return { ...state, reps: { ...state.reps, ...action.value } };
     case 'SET_TIMER':
@@ -52,7 +60,7 @@ export function StoreProvider({ children }) {
   );
 
   const value = useMemo(
-    () => ({ state, dispatch, patterns, currentPatternInfo }),
+    () => ({ state, dispatch, patterns, categories, currentPatternInfo }),
     [state, currentPatternInfo]
   );
 
