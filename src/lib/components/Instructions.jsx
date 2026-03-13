@@ -49,23 +49,7 @@ export default function Instructions() {
         Stick Control!
       </p>
 
-      <h3 className="mt-12">What&apos;s next?</h3>
-      <p className="my-2">
-        The tool currently supports all 72 single-beat combinations. More rhythms
-        including triplets, flam beats, and short roll combinations will be added over
-        time.
-      </p>
-      <p className="my-2">Mobile support will be added at a later time.</p>
 
-      <h3 className="mt-12">Need inspiration?</h3>
-      <iframe
-        src="https://www.youtube.com/embed/d_XKoWKJaaI"
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-        className="w-full aspect-video"
-      />
     </>
   );
 }
