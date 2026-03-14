@@ -9,7 +9,7 @@ export default function NotationLetters({ pattern, preview = false, noteXPositio
   const info = useMemo(() => getPatternInfo(pattern), [pattern]);
   const letters = info.letters.map(c => c === '_' ? '' : c.toUpperCase());
   const totalNotes = info.totalNotes;
-  const lineHeight = 100;
+  const lineHeight = 130;
 
   const previewClass =
     (reps.selected && counter > (reps.count - 1) * totalNotes) ||

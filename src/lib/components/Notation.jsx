@@ -20,7 +20,7 @@ export default function Notation() {
 
     const measures = patternToStave(patterns[currentPattern]);
     const lineCount = Math.ceil(measures.length / 2);
-    const lineHeight = 100;
+    const lineHeight = 130;
 
     const renderer = new Renderer(output, Renderer.Backends.SVG);
     renderer.resize(540, lineHeight * lineCount);
