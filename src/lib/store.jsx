@@ -2,14 +2,19 @@ import { createContext, useContext, useReducer, useMemo } from 'react';
 import allPatterns from './patterns/patterns';
 import tripletPatterns from './patterns/triplets';
 import tripletPlusPatterns from './patterns/tripletsPlus';
+import singleBeatRolls from './patterns/singleBeatRolls';
+import doubleBeatRolls from './patterns/doubleBeatRolls';
 import { getPatternInfo } from './patterns/patternUtils';
 
-const patterns = [...allPatterns, ...tripletPatterns, ...tripletPlusPatterns];
+const patterns = [...allPatterns, ...tripletPatterns, ...tripletPlusPatterns, ...singleBeatRolls, ...doubleBeatRolls];
 
+let offset = 0;
 const categories = [
-  { id: 'single', label: 'Single Beat Combinations', start: 0, count: allPatterns.length },
-  { id: 'triplets', label: 'Triplets', start: allPatterns.length, count: tripletPatterns.length },
-  { id: 'tripletsPlus', label: 'Triplets+', start: allPatterns.length + tripletPatterns.length, count: tripletPlusPatterns.length },
+  { id: 'single', label: 'Single Beat Combinations', start: (offset), count: allPatterns.length },
+  { id: 'triplets', label: 'Triplets', start: (offset += allPatterns.length), count: tripletPatterns.length },
+  { id: 'tripletsPlus', label: 'Triplets+', start: (offset += tripletPatterns.length), count: tripletPlusPatterns.length },
+  { id: 'singleBeatRolls', label: 'Short Rolls (Single Beat)', start: (offset += tripletPlusPatterns.length), count: singleBeatRolls.length },
+  { id: 'doubleBeatRolls', label: 'Short Rolls (Double Beat)', start: (offset += singleBeatRolls.length), count: doubleBeatRolls.length },
 ];
 
 const initialState = {
