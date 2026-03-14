@@ -2,7 +2,7 @@
  * Parse a pattern string into structured format.
  *
  * Format: "rlrl (rlr) (lrl) | rlrl (rlr) (lrl)"
- *   | separates measures, || separates lines (rows of 2 bars)
+ *   | separates measures (renderer displays 2 bars per line)
  *   () marks triplet groups, s: marks sixteenth notes
  *
  * Returns: array of measures, each measure is an array of groups
