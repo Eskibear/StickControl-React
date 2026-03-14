@@ -10,7 +10,7 @@ const exercises = [...singleBeatCombos, ...tripletExercises, ...tripletPlusExerc
 
 let offset = 0;
 const categories = [
-  { id: 'single', label: 'Single Beat Combinations (P5-7)', start: (offset), count: singleBeatCombos.length },
+  { id: 'single', label: 'Single Beat Combos (P5-7)', start: (offset), count: singleBeatCombos.length },
   { id: 'triplets', label: 'Triplets (P8)', start: (offset += singleBeatCombos.length), count: tripletExercises.length },
   { id: 'tripletsPlus', label: 'Triplets+ (P9)', start: (offset += tripletExercises.length), count: tripletPlusExercises.length },
   { id: 'singleBeatRolls', label: 'Short Rolls - Single Beat (P10)', start: (offset += tripletPlusExercises.length), count: singleBeatRolls.length },
