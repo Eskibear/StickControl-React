@@ -23,11 +23,17 @@ export default function NotationLetters({ pattern, preview = false, noteXPositio
     return {};
   };
 
+  const letterColor = (letter) => {
+    if (letter === 'R') return 'text-blue-600';
+    if (letter === 'L') return 'text-red-600';
+    return '';
+  };
+
   const letterClass = (idx) => {
-    const base = 'letter absolute';
+    const base = `letter absolute ${letterColor(letters[idx])}`;
     if (preview) return base;
     const isActive = idx === (counter - 1) % totalNotes;
-    return `${base} ${isActive ? 'text-emerald-800 font-bold translate-y-1 transition-all' : ''}`;
+    return `${base} ${isActive ? 'font-bold translate-y-1 transition-all' : ''}`;
   };
 
   return (
