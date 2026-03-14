@@ -4,9 +4,9 @@ export default function Nav() {
   return (
     <nav className="left-0 right-0 top-0 h-16 py-5 px-12 bg-white shadow-sm mb-4 flex items-center">
       <img src={`${import.meta.env.BASE_URL}drum.png`} alt="drum logo" className="mr-8 h-full" />
-      <p>Interactive Stick Control</p>
+      <p>Stick Control ... for the Screen</p>
       <a
-        href="https://www.github.com/cptleo92"
+        href="https://www.github.com/Eskibear/StickControl-React"
         target="_blank"
         rel="noreferrer"
         className="ml-auto opacity-50 hover:opacity-80 text-2xl"

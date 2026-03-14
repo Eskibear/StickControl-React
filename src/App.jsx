@@ -22,11 +22,10 @@ function App() {
       {ready && (
         <>
           <div className="main box-border flex flex-col justify-center my-8 md:max-w-screen-md m-auto bg-white p-8 border rounded-md shadow-md">
-            <div className="relative border p-2 rounded-md">
-              <img className="w-[60%] m-auto" src={`${import.meta.env.BASE_URL}stick-control.png`} alt="logo" />
-              <h4 className="absolute top-1/2 left-1/2 font-semibold underline">
-                <em>... for the Screen</em>
-              </h4>
+            <div className="border p-4 rounded-md text-center">
+              <h1 className="text-2xl font-bold tracking-wide">STICK CONTROL</h1>
+              <p className="text-lg text-gray-600">for the SNARE DRUMMER</p>
+              <p className="font-semibold mt-1"><em>... for the Screen</em></p>
             </div>
             <Metronome />
             <Notation />
