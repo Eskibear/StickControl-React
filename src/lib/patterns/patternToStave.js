@@ -9,9 +9,10 @@ function createNote(char, sixteenth) {
   if (char === "_") {
     return new StaveNote({ keys: ["b/4"], duration: duration + "r" });
   }
-  return char === "r"
-    ? new StaveNote({ keys: ["c/5"], duration })
-    : new StaveNote({ keys: ["a/4"], duration });
+  const note = new StaveNote({ keys: ["c/5"], duration });
+  const color = char === "r" ? "#2563eb" : "#dc2626";
+  note.setStyle({ fillStyle: color, strokeStyle: color });
+  return note;
 }
 
 export const patternToStave = (pattern) => {
