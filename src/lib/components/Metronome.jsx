@@ -281,7 +281,7 @@ export default function Metronome() {
           onChange={handleChangePattern}
         />
         <p>
-          Current Pattern:{' '}
+          Exercise:{' '}
           <input
             className="text-3xl font-bold border p-1 w-24 text-center ml-2"
             type="number"
