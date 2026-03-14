@@ -14,11 +14,11 @@ export default [
   // Exercise 4 (4 bars)
   "llrr (lrl) (rlr) | llrr (lrl) (rlr) || llrr (lrl) (rlr) | (lrl) (rlr) (lrl) (rlr)",
   // Exercise 5 (8 bars)
-  "rlrr (lrl) (rlr) | lrll (rlr) (lrl) || rlrr (lrl) (rlr) | lrll (rlr) (lrl) || lrll (rlr) (lrl) | rlrr (lrl) (rlr) || lrll (rlr) (lrl) | (lrl) (rlr) (lrl) (rlr)",
+  "rlrr (lrl) (rlr) | lrll (rlr) (lrl) || rlrr (lrl) (rlr) | (lrl) (rlr) (lrl) (rlr) || lrll (rlr) (lrl) | rlrr (lrl) (rlr) || lrll (rlr) (lrl) | (rlr) (lrl) (rlr) (lrl)",
   // Exercise 6 (8 bars)
-  "rllr (lrl) (rlr) | lrrl (rlr) (lrl) || rllr (lrl) (rlr) | lrrl (rlr) (lrl) || lrrl (rlr) (lrl) | rllr (lrl) (rlr) || lrrl (rlr) (lrl) | (lrl) (rlr) (lrl) (rlr)",
+  "rllr (lrl) (rlr) | lrrl (rlr) (lrl) || rllr (lrl) (rlr) | (lrl) (rlr) (lrl) (rlr) || lrrl (rlr) (lrl) | rllr (lrl) (rlr) || lrrl (rlr) (lrl) | (rlr) (lrl) (rlr) (lrl)",
   // Exercise 7 (8 bars)
-  "rrlr (lrl) (rlr) | llrl (rlr) (lrl) || rrlr (lrl) (rlr) | llrl (rlr) (lrl) || llrl (rlr) (lrl) | rrlr (lrl) (rlr) || llrl (rlr) (lrl) | (lrl) (rlr) (lrl) (rlr)",
+  "rrlr (lrl) (rlr) | llrl (rlr) (lrl) || rrlr (lrl) (rlr) | (lrl) (rlr) (lrl) (rlr) || llrl (rlr) (lrl) | rrlr (lrl) (rlr) || llrl (rlr) (lrl) | (rlr) (lrl) (rlr) (lrl)",
   // Exercise 8 (4 bars)
   "rlll (rlr) (lrl) | rlll (rlr) (lrl) || rlll (rlr) (lrl) | (rlr) (lrl) (rlr) (lrl)",
   // Exercise 9 (4 bars)
