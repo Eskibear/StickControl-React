@@ -4,8 +4,8 @@
 import { StaveNote } from "vexflow";
 import { parsePattern } from "./patternUtils";
 
-function createNote(char, quarter) {
-  const duration = quarter ? "q" : "8";
+function createNote(char, sixteenth) {
+  const duration = sixteenth ? "16" : "8";
   return char === "r"
     ? new StaveNote({ keys: ["c/5"], duration })
     : new StaveNote({ keys: ["a/4"], duration });
@@ -22,13 +22,11 @@ export const patternToStave = (pattern) => {
     measure.forEach(group => {
       const notes = [];
       for (const char of group.notes) {
-        const note = createNote(char, group.quarter);
+        const note = createNote(char, group.sixteenth);
         notes.push(note);
         allNotes.push(note);
       }
-      if (!group.quarter) {
-        beams.push(notes);
-      }
+      beams.push(notes);
       if (group.triplet) {
         tuplets.push(notes);
       }

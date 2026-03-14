@@ -1,34 +1,34 @@
 // Short Roll Combinations (Double Beat Rolls) from page 11
-// Each measure: 4 quarter-note starting pattern + double-stroke eighth-note roll
-// Exercises 1-12: 9-stroke open roll (4 quarters + 8 eighths)
-// Exercises 13-24: 7-stroke open roll (4 quarters + 7 eighths)
+// Each measure: 4 eighth-note starting pattern + sixteenth-note double-stroke roll
+// Exercises 1-12: 9-stroke open roll (4 eighths + 8 sixteenths)
+// Exercises 13-24: 7-stroke open roll (4 eighths + 7 sixteenths)
 
 export default [
   // Exercises 1-12 (9-stroke open roll, double beat)
-  "q:rlrl rrll rrll | q:rlrl rrll rrll",           // 1
-  "q:lrlr llrr llrr | q:lrlr llrr llrr",           // 2
-  "q:rrll rrll rrll | q:rrll rrll rrll",            // 3
-  "q:llrr llrr llrr | q:llrr llrr llrr",            // 4
-  "q:rlrr llrr llrr | q:lrll rrll rrll",            // 5
-  "q:rllr llrr llrr | q:lrrl rrll rrll",            // 6
-  "q:rrlr llrr llrr | q:llrl rrll rrll",            // 7
-  "q:rrrl rrll rrll | q:rrrl rrll rrll",            // 8
-  "q:lllr llrr llrr | q:lllr llrr llrr",            // 9
-  "q:rlll rrll rrll | q:rlll rrll rrll",            // 10
-  "q:lrrr llrr llrr | q:lrrr llrr llrr",            // 11
-  "q:rrrr llrr llrr | q:llll rrll rrll",            // 12
+  "rlrl s:rrll s:rrll | rlrl s:rrll s:rrll",           // 1
+  "lrlr s:llrr s:llrr | lrlr s:llrr s:llrr",           // 2
+  "rrll s:rrll s:rrll | rrll s:rrll s:rrll",            // 3
+  "llrr s:llrr s:llrr | llrr s:llrr s:llrr",            // 4
+  "rlrr s:llrr s:llrr | lrll s:rrll s:rrll",            // 5
+  "rllr s:llrr s:llrr | lrrl s:rrll s:rrll",            // 6
+  "rrlr s:llrr s:llrr | llrl s:rrll s:rrll",            // 7
+  "rrrl s:rrll s:rrll | rrrl s:rrll s:rrll",            // 8
+  "lllr s:llrr s:llrr | lllr s:llrr s:llrr",            // 9
+  "rlll s:rrll s:rrll | rlll s:rrll s:rrll",            // 10
+  "lrrr s:llrr s:llrr | lrrr s:llrr s:llrr",            // 11
+  "rrrr s:llrr s:llrr | llll s:rrll s:rrll",            // 12
 
   // Exercises 13-24 (7-stroke open roll, double beat)
-  "q:rlrl rrll rrl | q:rlrl rrll rrl",             // 13
-  "q:lrlr llrr llr | q:lrlr llrr llr",             // 14
-  "q:rrll rrll rrl | q:rrll rrll rrl",              // 15
-  "q:llrr llrr llr | q:llrr llrr llr",              // 16
-  "q:rlrr llrr llr | q:lrll rrll rrl",              // 17
-  "q:rllr llrr llr | q:lrrl rrll rrl",              // 18
-  "q:rrlr llrr llr | q:llrl rrll rrl",              // 19
-  "q:rrrl rrll rrl | q:rrrl rrll rrl",              // 20
-  "q:lllr llrr llr | q:lllr llrr llr",              // 21
-  "q:rlll rrll rrl | q:rlll rrll rrl",              // 22
-  "q:lrrr llrr llr | q:lrrr llrr llr",              // 23
-  "q:rrrr llrr llr | q:llll rrll rrl",              // 24
+  "rlrl s:rrll s:rrl | rlrl s:rrll s:rrl",             // 13
+  "lrlr s:llrr s:llr | lrlr s:llrr s:llr",             // 14
+  "rrll s:rrll s:rrl | rrll s:rrll s:rrl",              // 15
+  "llrr s:llrr s:llr | llrr s:llrr s:llr",              // 16
+  "rlrr s:llrr s:llr | lrll s:rrll s:rrl",              // 17
+  "rllr s:llrr s:llr | lrrl s:rrll s:rrl",              // 18
+  "rrlr s:llrr s:llr | llrl s:rrll s:rrl",              // 19
+  "rrrl s:rrll s:rrl | rrrl s:rrll s:rrl",              // 20
+  "lllr s:llrr s:llr | lllr s:llrr s:llr",              // 21
+  "rlll s:rrll s:rrl | rlll s:rrll s:rrl",              // 22
+  "lrrr s:llrr s:llr | lrrr s:llrr s:llr",              // 23
+  "rrrr s:llrr s:llr | llll s:rrll s:rrl",              // 24
 ]

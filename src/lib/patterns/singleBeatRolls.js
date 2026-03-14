@@ -1,34 +1,34 @@
 // Short Roll Combinations (Single Beat Rolls) from page 10
-// Each measure: 4 quarter-note starting pattern + alternating eighth-note roll
-// Exercises 1-12: 9-stroke open roll (4 quarters + 8 eighths)
-// Exercises 13-24: 7-stroke open roll (4 quarters + 7 eighths)
+// Each measure: 4 eighth-note starting pattern + sixteenth-note roll
+// Exercises 1-12: 9-stroke open roll (4 eighths + 8 sixteenths)
+// Exercises 13-24: 7-stroke open roll (4 eighths + 7 sixteenths)
 
 export default [
   // Exercises 1-12 (9-stroke open roll, single beat)
-  "q:rlrl rlrl rlrl | q:rlrl rlrl rlrl",          // 1
-  "q:lrlr lrlr lrlr | q:lrlr lrlr lrlr",          // 2
-  "q:rrll rlrl rlrl | q:rrll rlrl rlrl",           // 3
-  "q:llrr lrlr lrlr | q:llrr lrlr lrlr",           // 4
-  "q:rlrr lrlr lrlr | q:lrll rlrl rlrl",           // 5
-  "q:rllr lrlr lrlr | q:lrrl rlrl rlrl",           // 6
-  "q:rrlr lrlr lrlr | q:llrl rlrl rlrl",           // 7
-  "q:rrrl rlrl rlrl | q:rrrl rlrl rlrl",           // 8
-  "q:lllr lrlr lrlr | q:lllr lrlr lrlr",           // 9
-  "q:rlll rlrl rlrl | q:rlll rlrl rlrl",           // 10
-  "q:lrrr lrlr lrlr | q:lrrr lrlr lrlr",           // 11
-  "q:rrrr lrlr lrlr | q:llll rlrl rlrl",           // 12
+  "rlrl s:rlrl s:rlrl | rlrl s:rlrl s:rlrl",          // 1
+  "lrlr s:lrlr s:lrlr | lrlr s:lrlr s:lrlr",          // 2
+  "rrll s:rlrl s:rlrl | rrll s:rlrl s:rlrl",           // 3
+  "llrr s:lrlr s:lrlr | llrr s:lrlr s:lrlr",           // 4
+  "rlrr s:lrlr s:lrlr | lrll s:rlrl s:rlrl",           // 5
+  "rllr s:lrlr s:lrlr | lrrl s:rlrl s:rlrl",           // 6
+  "rrlr s:lrlr s:lrlr | llrl s:rlrl s:rlrl",           // 7
+  "rrrl s:rlrl s:rlrl | rrrl s:rlrl s:rlrl",           // 8
+  "lllr s:lrlr s:lrlr | lllr s:lrlr s:lrlr",           // 9
+  "rlll s:rlrl s:rlrl | rlll s:rlrl s:rlrl",           // 10
+  "lrrr s:lrlr s:lrlr | lrrr s:lrlr s:lrlr",           // 11
+  "rrrr s:lrlr s:lrlr | llll s:rlrl s:rlrl",           // 12
 
   // Exercises 13-24 (7-stroke open roll, single beat)
-  "q:rlrl rlrl rlr | q:rlrl rlrl rlr",            // 13
-  "q:lrlr lrlr lrl | q:lrlr lrlr lrl",            // 14
-  "q:rrll rlrl rlr | q:rrll rlrl rlr",             // 15
-  "q:llrr lrlr lrl | q:llrr lrlr lrl",             // 16
-  "q:rlrr lrlr lrl | q:lrll rlrl rlr",             // 17
-  "q:rllr lrlr lrl | q:lrrl rlrl rlr",             // 18
-  "q:rrlr lrlr lrl | q:llrl rlrl rlr",             // 19
-  "q:rrrl rlrl rlr | q:rrrl rlrl rlr",             // 20
-  "q:lllr lrlr lrl | q:lllr lrlr lrl",             // 21
-  "q:rlll rlrl rlr | q:rlll rlrl rlr",             // 22
-  "q:lrrr lrlr lrl | q:lrrr lrlr lrl",             // 23
-  "q:rrrr lrlr lrl | q:llll rlrl rlr",             // 24
+  "rlrl s:rlrl s:rlr | rlrl s:rlrl s:rlr",            // 13
+  "lrlr s:lrlr s:lrl | lrlr s:lrlr s:lrl",            // 14
+  "rrll s:rlrl s:rlr | rrll s:rlrl s:rlr",             // 15
+  "llrr s:lrlr s:lrl | llrr s:lrlr s:lrl",             // 16
+  "rlrr s:lrlr s:lrl | lrll s:rlrl s:rlr",             // 17
+  "rllr s:lrlr s:lrl | lrrl s:rlrl s:rlr",             // 18
+  "rrlr s:lrlr s:lrl | llrl s:rlrl s:rlr",             // 19
+  "rrrl s:rlrl s:rlr | rrrl s:rlrl s:rlr",             // 20
+  "lllr s:lrlr s:lrl | lllr s:lrlr s:lrl",             // 21
+  "rlll s:rlrl s:rlr | rlll s:rlrl s:rlr",             // 22
+  "lrrr s:lrlr s:lrl | lrrr s:lrlr s:lrl",             // 23
+  "rrrr s:lrlr s:lrl | llll s:rlrl s:rlr",             // 24
 ]
