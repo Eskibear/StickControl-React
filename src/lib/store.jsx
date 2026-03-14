@@ -10,11 +10,11 @@ const patterns = [...allPatterns, ...tripletPatterns, ...tripletPlusPatterns, ..
 
 let offset = 0;
 const categories = [
-  { id: 'single', label: 'Single Beat Combinations', start: (offset), count: allPatterns.length },
-  { id: 'triplets', label: 'Triplets', start: (offset += allPatterns.length), count: tripletPatterns.length },
-  { id: 'tripletsPlus', label: 'Triplets+', start: (offset += tripletPatterns.length), count: tripletPlusPatterns.length },
-  { id: 'singleBeatRolls', label: 'Short Rolls (Single Beat)', start: (offset += tripletPlusPatterns.length), count: singleBeatRolls.length },
-  { id: 'doubleBeatRolls', label: 'Short Rolls (Double Beat)', start: (offset += singleBeatRolls.length), count: doubleBeatRolls.length },
+  { id: 'single', label: 'Single Beat Combinations (P5-7)', start: (offset), count: allPatterns.length },
+  { id: 'triplets', label: 'Triplets (P8)', start: (offset += allPatterns.length), count: tripletPatterns.length },
+  { id: 'tripletsPlus', label: 'Triplets+ (P9)', start: (offset += tripletPatterns.length), count: tripletPlusPatterns.length },
+  { id: 'singleBeatRolls', label: 'Short Rolls - Single Beat (P10)', start: (offset += tripletPlusPatterns.length), count: singleBeatRolls.length },
+  { id: 'doubleBeatRolls', label: 'Short Rolls - Double Beat (P11)', start: (offset += singleBeatRolls.length), count: doubleBeatRolls.length },
 ];
 
 const initialState = {
