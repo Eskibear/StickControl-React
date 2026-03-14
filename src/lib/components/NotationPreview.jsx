@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Renderer, Stave, Formatter, Beam, Tuplet } from 'vexflow';
 import { useStore } from '../store';
-import { patternToStave } from '../patterns/patternToStave';
-import NotationLetters from './NotationLetters';
+import { exerciseToStave } from '../exercises/exerciseToStave';
+import ExerciseLetters from './ExerciseLetters';
 
 export default function NotationPreview() {
-  const { state, patterns, categories, currentPatternInfo } = useStore();
-  const { counter, currentPattern, category, reps, timer } = state;
+  const { state, exercises, categories, currentExerciseInfo } = useStore();
+  const { counter, currentExercise, category, reps, timer } = state;
   const categoryInfo = categories.find(c => c.id === category);
   const categoryEnd = categoryInfo.start + categoryInfo.count - 1;
   const outputRef = useRef(null);
@@ -15,11 +15,11 @@ export default function NotationPreview() {
   const drawNotes = useCallback(() => {
     const output = outputRef.current;
     if (!output) return;
-    if (currentPattern >= categoryEnd) return;
+    if (currentExercise >= categoryEnd) return;
 
     output.querySelectorAll(':scope > svg').forEach(el => el.remove());
 
-    const measures = patternToStave(patterns[currentPattern + 1]);
+    const measures = exerciseToStave(exercises[currentExercise + 1]);
     const lineCount = Math.ceil(measures.length / 2);
     const staveHeight = 100;
     const letterGap = 25;
@@ -68,18 +68,18 @@ export default function NotationPreview() {
     }
 
     setNoteXPositions(allXPositions);
-  }, [currentPattern, patterns, categoryEnd]);
+  }, [currentExercise, exercises, categoryEnd]);
 
   useEffect(() => {
     drawNotes();
   }, [drawNotes]);
 
-  if (currentPattern >= categoryEnd) return null;
+  if (currentExercise >= categoryEnd) return null;
 
-  const nextDisplayNum = currentPattern - categoryInfo.start + 2;
+  const nextDisplayNum = currentExercise - categoryInfo.start + 2;
 
   const previewClass =
-    (reps.selected && counter > (reps.count - 1) * currentPatternInfo.totalNotes) ||
+    (reps.selected && counter > (reps.count - 1) * currentExerciseInfo.totalNotes) ||
     (timer.selected && timer.currentSeconds <= 3)
       ? 'opacity-25'
       : 'opacity-0';
@@ -92,8 +92,8 @@ export default function NotationPreview() {
         {nextDisplayNum < 10 ? '0' : ''}{nextDisplayNum}
       </p>
       <div className="text-center output-prev relative" ref={outputRef}>
-        <NotationLetters
-          pattern={patterns[currentPattern + 1]}
+        <ExerciseLetters
+          exercise={exercises[currentExercise + 1]}
           preview={true}
           noteXPositions={noteXPositions}
         />

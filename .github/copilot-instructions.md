@@ -20,11 +20,11 @@ pdftoppm -f 11 -l 11 -png 'pdf/Stick Control.pdf' /tmp/page
 
 ## Architecture
 
-This is an interactive drumming practice tool based on the book *Stick Control for the Snare Drummer*. It renders musical notation and plays a metronome so users can practice sticking patterns hands-free.
+This is an interactive drumming practice tool based on the book *Stick Control for the Snare Drummer*. It renders musical notation and plays a metronome so users can practice sticking exercises hands-free.
 
 ### Pattern DSL
 
-The core data model is a string-based pattern language defined in `src/lib/patterns/`:
+The core data model is a string-based pattern language defined in `src/lib/exercises/`:
 
 ```
 "rlrl rlrl | rlrl rlrl"                    — eighth notes (r = right, l = left)
@@ -43,28 +43,28 @@ The core data model is a string-based pattern language defined in `src/lib/patte
 
 ### Pattern Files & Categories
 
-Patterns are organized by category in `src/lib/patterns/`, combined and registered in `store.jsx`:
+Patterns are organized by category in `src/lib/exercises/`, combined and registered in `store.jsx`:
 
 | File | Category | Count | Book Pages |
 |------|----------|-------|------------|
-| `patterns.js` | Single Beat Combinations | 72 | P5-7 |
+| `singleBeatCombos.js` | Single Beat Combinations | 72 | P5-7 |
 | `triplets.js` | Triplets | 24 | P8 |
 | `tripletsPlus.js` | Triplets+ | 9 | P9 |
 | `singleBeatRolls.js` | Short Rolls - Single Beat | 24 | P10 |
 | `doubleBeatRolls.js` | Short Rolls - Double Beat | 24 | P11 |
 
-- `patternUtils.js` parses the DSL into structured data (notes, durations, beat positions, measure count).
-- `patternToStave.js` converts parsed patterns into VexFlow `StaveNote` objects for rendering.
+- `exerciseUtils.js` parses the DSL into structured data (notes, durations, beat positions, measure count).
+- `exerciseToStave.js` converts parsed exercises into VexFlow `StaveNote` objects for rendering.
 
 ### State Management
 
 Global state lives in `src/lib/store.jsx` using React Context + `useReducer` (no external state library). Components access it via `useStore()`. The store provides:
 
 - `state` — counter, currentPattern, category, reps/timer settings
-- `dispatch` — reducer actions (`SET_COUNTER`, `INCREMENT_COUNTER`, `SET_CURRENT_PATTERN`, `SET_CATEGORY`, `SET_REPS`, `SET_TIMER`, `SELECT_REPS`, `SELECT_TIMER`)
-- `patterns` — the combined array of all pattern strings
+- `dispatch` — reducer actions (`SET_COUNTER`, `INCREMENT_COUNTER`, `SET_CURRENT_EXERCISE`, `SET_CATEGORY`, `SET_REPS`, `SET_TIMER`, `SELECT_REPS`, `SELECT_TIMER`)
+- `exercises` — the combined array of all exercise strings
 - `categories` — array of `{ id, label, start, count }` for the dropdown
-- `currentPatternInfo` — memoized metadata for the active pattern (letters, durations, beat positions, triplet flag, measureCount)
+- `currentExerciseInfo` — memoized metadata for the active exercise (letters, durations, beat positions, triplet flag, measureCount)
 
 ### Metronome Scheduler
 
@@ -72,7 +72,7 @@ Global state lives in `src/lib/store.jsx` using React Context + `useReducer` (no
 
 ### Notation Rendering
 
-`Notation.jsx` and `NotationPreview.jsx` use [VexFlow](https://www.vexflow.com/) to render standard music notation as SVG. Multi-bar patterns are rendered with 2 bars per line, stacked vertically. After VexFlow draws the notes, their absolute X positions (with line index) are extracted and passed to `NotationLetters.jsx`, which overlays colored R/L sticking letters aligned beneath each note.
+`Notation.jsx` and `NotationPreview.jsx` use [VexFlow](https://www.vexflow.com/) to render standard music notation as SVG. Multi-bar exercises are rendered with 2 bars per line, stacked vertically. After VexFlow draws the notes, their absolute X positions (with line index) are extracted and passed to `NotationLetters.jsx`, which overlays colored R/L sticking letters aligned beneath each note.
 
 ## Conventions
 

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Renderer, Stave, Formatter, Beam, Tuplet } from 'vexflow';
 import { useStore } from '../store';
-import { patternToStave } from '../patterns/patternToStave';
-import NotationLetters from './NotationLetters';
+import { exerciseToStave } from '../exercises/exerciseToStave';
+import ExerciseLetters from './ExerciseLetters';
 
 export default function Notation() {
-  const { state, patterns, categories, currentPatternInfo } = useStore();
-  const { counter, currentPattern, category, reps, timer } = state;
+  const { state, exercises, categories, currentExerciseInfo } = useStore();
+  const { counter, currentExercise, category, reps, timer } = state;
   const categoryInfo = categories.find(c => c.id === category);
-  const displayNum = currentPattern - categoryInfo.start + 1;
+  const displayNum = currentExercise - categoryInfo.start + 1;
   const outputRef = useRef(null);
   const [noteXPositions, setNoteXPositions] = useState([]);
 
@@ -18,7 +18,7 @@ export default function Notation() {
 
     output.querySelectorAll(':scope > svg').forEach(el => el.remove());
 
-    const measures = patternToStave(patterns[currentPattern]);
+    const measures = exerciseToStave(exercises[currentExercise]);
     const lineCount = Math.ceil(measures.length / 2);
     const staveHeight = 100;
     const letterGap = 25;
@@ -67,14 +67,14 @@ export default function Notation() {
     }
 
     setNoteXPositions(allXPositions);
-  }, [currentPattern, patterns]);
+  }, [currentExercise, exercises]);
 
   useEffect(() => {
     drawNotes();
   }, [drawNotes]);
 
   const displayValue = reps.selected
-    ? Math.ceil(counter / currentPatternInfo.totalNotes)
+    ? Math.ceil(counter / currentExerciseInfo.totalNotes)
     : timer.currentSeconds;
 
   return (
@@ -91,8 +91,8 @@ export default function Notation() {
           {displayNum < 10 ? '0' : ''}{displayNum}
         </p>
         <div className="text-center output relative" ref={outputRef}>
-          <NotationLetters
-            pattern={patterns[currentPattern]}
+          <ExerciseLetters
+            exercise={exercises[currentExercise]}
             noteXPositions={noteXPositions}
           />
         </div>

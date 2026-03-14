@@ -3,8 +3,8 @@ import { useStore } from '../store';
 const metronomeSFX = `${import.meta.env.BASE_URL}metronome.mp3`;
 
 export default function Metronome() {
-  const { state, dispatch, categories, currentPatternInfo } = useStore();
-  const { counter, currentPattern, category, reps, timer } = state;
+  const { state, dispatch, categories, currentExerciseInfo } = useStore();
+  const { counter, currentExercise, category, reps, timer } = state;
 
   const categoryInfo = categories.find(c => c.id === category);
 
@@ -23,12 +23,12 @@ export default function Metronome() {
   // Use refs to track mutable state the scheduler needs without re-renders
   const stateRef = useRef(state);
   const bpmRef = useRef(bpm);
-  const currentPatternInfoRef = useRef(currentPatternInfo);
+  const currentExerciseInfoRef = useRef(currentExerciseInfo);
   const categoryInfoRef = useRef(categoryInfo);
 
   useEffect(() => { stateRef.current = state; }, [state]);
   useEffect(() => { bpmRef.current = bpm; }, [bpm]);
-  useEffect(() => { currentPatternInfoRef.current = currentPatternInfo; }, [currentPatternInfo]);
+  useEffect(() => { currentExerciseInfoRef.current = currentExerciseInfo; }, [currentExerciseInfo]);
   useEffect(() => { categoryInfoRef.current = categoryInfo; }, [categoryInfo]);
 
   const scheduleAheadTime = 0.1;
@@ -55,42 +55,42 @@ export default function Metronome() {
 
   // We use a ref-based dispatch approach so the scheduler closure always has current state
   const counterRef = useRef(0);
-  const currentPatternRef = useRef(0);
+  const currentExerciseRef = useRef(0);
 
   useEffect(() => { counterRef.current = counter; }, [counter]);
-  useEffect(() => { currentPatternRef.current = currentPattern; }, [currentPattern]);
+  useEffect(() => { currentExerciseRef.current = currentExercise; }, [currentExercise]);
 
   const scheduler = useCallback(() => {
     const ctx = audioCtxRef.current;
     if (!ctx) return;
 
-    const nextPatInCategory = () => {
+    const nextExerciseInCategory = () => {
       const cat = categoryInfoRef.current;
-      const offset = currentPatternRef.current - cat.start;
+      const offset = currentExerciseRef.current - cat.start;
       return cat.start + (offset + 1) % cat.count;
     };
 
     while (nextNoteTimeRef.current < ctx.currentTime + scheduleAheadTime) {
-      const info = currentPatternInfoRef.current;
+      const info = currentExerciseInfoRef.current;
       const s = stateRef.current;
       const cnt = counterRef.current;
 
-      // Handle deferred pattern transition from previous tick
+      // Handle deferred exercise transition from previous tick
       if (s.reps.selected && cnt > 0 && cnt % (s.reps.count * info.totalNotes) === 0) {
-        const nextPat = nextPatInCategory();
-        dispatch({ type: 'SET_CURRENT_PATTERN', value: nextPat });
+        const next = nextExerciseInCategory();
+        dispatch({ type: 'SET_CURRENT_EXERCISE', value: next });
         dispatch({ type: 'SET_COUNTER', value: 0 });
         counterRef.current = 0;
-        currentPatternRef.current = nextPat;
+        currentExerciseRef.current = next;
         return;
       }
       if (cnt > 0 && s.timer.currentSeconds === 0 && cnt % info.totalNotes === 0) {
-        const nextPat = nextPatInCategory();
-        dispatch({ type: 'SET_CURRENT_PATTERN', value: nextPat });
+        const next = nextExerciseInCategory();
+        dispatch({ type: 'SET_CURRENT_EXERCISE', value: next });
         dispatch({ type: 'SET_COUNTER', value: 0 });
         dispatch({ type: 'SET_TIMER', value: { currentSeconds: s.timer.startSeconds } });
         counterRef.current = 0;
-        currentPatternRef.current = nextPat;
+        currentExerciseRef.current = next;
         return;
       }
 
@@ -190,16 +190,16 @@ export default function Metronome() {
     if (playing) stopPlaying();
   };
 
-  const handleChangePattern = (e) => {
+  const handleChangeExercise = (e) => {
     let val = Math.max(Number(e.target.value), 1);
     val = Math.min(val, categoryInfo.count);
-    dispatch({ type: 'SET_CURRENT_PATTERN', value: categoryInfo.start + val - 1 });
+    dispatch({ type: 'SET_CURRENT_EXERCISE', value: categoryInfo.start + val - 1 });
   };
 
   const handleChangeCategory = (e) => {
     const cat = categories.find(c => c.id === e.target.value);
     dispatch({ type: 'SET_CATEGORY', value: cat.id });
-    dispatch({ type: 'SET_CURRENT_PATTERN', value: cat.start });
+    dispatch({ type: 'SET_CURRENT_EXERCISE', value: cat.start });
     if (playing) stopPlaying();
   };
 
@@ -233,7 +233,7 @@ export default function Metronome() {
     };
   }, []);
 
-  const patternSelect = currentPattern - categoryInfo.start + 1;
+  const exerciseSelect = currentExercise - categoryInfo.start + 1;
 
   return (
     <section className="p-6">
@@ -277,8 +277,8 @@ export default function Metronome() {
           min="1"
           max={categoryInfo.count}
           className="slider"
-          value={patternSelect}
-          onChange={handleChangePattern}
+          value={exerciseSelect}
+          onChange={handleChangeExercise}
         />
         <p>
           Exercise:{' '}
@@ -287,8 +287,8 @@ export default function Metronome() {
             type="number"
             min="1"
             max={categoryInfo.count}
-            value={patternSelect}
-            onChange={handleChangePattern}
+            value={exerciseSelect}
+            onChange={handleChangeExercise}
           />
         </p>
 

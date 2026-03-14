@@ -1,25 +1,25 @@
 import { createContext, useContext, useReducer, useMemo } from 'react';
-import allPatterns from './patterns/patterns';
-import tripletPatterns from './patterns/triplets';
-import tripletPlusPatterns from './patterns/tripletsPlus';
-import singleBeatRolls from './patterns/singleBeatRolls';
-import doubleBeatRolls from './patterns/doubleBeatRolls';
-import { getPatternInfo } from './patterns/patternUtils';
+import singleBeatCombos from './exercises/singleBeatCombos';
+import tripletExercises from './exercises/triplets';
+import tripletPlusExercises from './exercises/tripletsPlus';
+import singleBeatRolls from './exercises/singleBeatRolls';
+import doubleBeatRolls from './exercises/doubleBeatRolls';
+import { getExerciseInfo } from './exercises/exerciseUtils';
 
-const patterns = [...allPatterns, ...tripletPatterns, ...tripletPlusPatterns, ...singleBeatRolls, ...doubleBeatRolls];
+const exercises = [...singleBeatCombos, ...tripletExercises, ...tripletPlusExercises, ...singleBeatRolls, ...doubleBeatRolls];
 
 let offset = 0;
 const categories = [
-  { id: 'single', label: 'Single Beat Combinations (P5-7)', start: (offset), count: allPatterns.length },
-  { id: 'triplets', label: 'Triplets (P8)', start: (offset += allPatterns.length), count: tripletPatterns.length },
-  { id: 'tripletsPlus', label: 'Triplets+ (P9)', start: (offset += tripletPatterns.length), count: tripletPlusPatterns.length },
-  { id: 'singleBeatRolls', label: 'Short Rolls - Single Beat (P10)', start: (offset += tripletPlusPatterns.length), count: singleBeatRolls.length },
+  { id: 'single', label: 'Single Beat Combinations (P5-7)', start: (offset), count: singleBeatCombos.length },
+  { id: 'triplets', label: 'Triplets (P8)', start: (offset += singleBeatCombos.length), count: tripletExercises.length },
+  { id: 'tripletsPlus', label: 'Triplets+ (P9)', start: (offset += tripletExercises.length), count: tripletPlusExercises.length },
+  { id: 'singleBeatRolls', label: 'Short Rolls - Single Beat (P10)', start: (offset += tripletPlusExercises.length), count: singleBeatRolls.length },
   { id: 'doubleBeatRolls', label: 'Short Rolls - Double Beat (P11)', start: (offset += singleBeatRolls.length), count: doubleBeatRolls.length },
 ];
 
 const initialState = {
   counter: 0,
-  currentPattern: 0,
+  currentExercise: 0,
   category: 'single',
   reps: { count: 20, selected: true },
   timer: { startSeconds: 60, currentSeconds: 60, selected: false },
@@ -31,8 +31,8 @@ function reducer(state, action) {
       return { ...state, counter: action.value };
     case 'INCREMENT_COUNTER':
       return { ...state, counter: state.counter + 1 };
-    case 'SET_CURRENT_PATTERN':
-      return { ...state, currentPattern: action.value };
+    case 'SET_CURRENT_EXERCISE':
+      return { ...state, currentExercise: action.value };
     case 'SET_CATEGORY':
       return { ...state, category: action.value };
     case 'SET_REPS':
@@ -61,14 +61,14 @@ const StoreContext = createContext(null);
 export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const currentPatternInfo = useMemo(
-    () => getPatternInfo(patterns[state.currentPattern]),
-    [state.currentPattern]
+  const currentExerciseInfo = useMemo(
+    () => getExerciseInfo(exercises[state.currentExercise]),
+    [state.currentExercise]
   );
 
   const value = useMemo(
-    () => ({ state, dispatch, patterns, categories, currentPatternInfo }),
-    [state, currentPatternInfo]
+    () => ({ state, dispatch, exercises, categories, currentExerciseInfo }),
+    [state, currentExerciseInfo]
   );
 
   return (

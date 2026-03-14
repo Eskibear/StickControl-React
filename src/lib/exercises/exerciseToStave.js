@@ -1,8 +1,8 @@
-// Converts a pattern string into VexFlow StaveNote objects for rendering.
-// Returns an array of 2 measures, each with { allNotes, beams, tuplets }.
+// Converts an exercise string into VexFlow StaveNote objects for rendering.
+// Returns an array of measures, each with { allNotes, beams, tuplets }.
 
 import { StaveNote } from "vexflow";
-import { parsePattern } from "./patternUtils";
+import { parseExercise } from "./exerciseUtils";
 
 function createNote(char, sixteenth) {
   const duration = sixteenth ? "16" : "8";
@@ -15,8 +15,8 @@ function createNote(char, sixteenth) {
   return note;
 }
 
-export const patternToStave = (pattern) => {
-  const parsed = parsePattern(pattern);
+export const exerciseToStave = (exercise) => {
+  const parsed = parseExercise(exercise);
 
   return parsed.map(measure => {
     const allNotes = [];

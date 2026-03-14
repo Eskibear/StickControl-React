@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useStore } from '../store';
-import { getPatternInfo } from '../patterns/patternUtils';
+import { getExerciseInfo } from '../exercises/exerciseUtils';
 
-export default function NotationLetters({ pattern, preview = false, noteXPositions = [] }) {
+export default function ExerciseLetters({ exercise, preview = false, noteXPositions = [] }) {
   const { state } = useStore();
   const { counter, reps, timer } = state;
 
-  const info = useMemo(() => getPatternInfo(pattern), [pattern]);
+  const info = useMemo(() => getExerciseInfo(exercise), [exercise]);
   const letters = info.letters.map(c => c === '_' ? '' : c.toUpperCase());
   const totalNotes = info.totalNotes;
   const staveHeight = 100;

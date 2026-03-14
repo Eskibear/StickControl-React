@@ -1,5 +1,5 @@
 /**
- * Parse a pattern string into structured format.
+ * Parse an exercise string into structured format.
  *
  * Format: "rlrl (rlr) (lrl) | rlrl (rlr) (lrl)"
  *   | separates measures (renderer displays 2 bars per line)
@@ -8,8 +8,8 @@
  * Returns: array of measures, each measure is an array of groups
  * Group: { notes: string, triplet: boolean, sixteenth: boolean }
  */
-export function parsePattern(pattern) {
-  const measureStrings = pattern.split('|').map(s => s.trim()).filter(s => s.length > 0);
+export function parseExercise(exercise) {
+  const measureStrings = exercise.split('|').map(s => s.trim()).filter(s => s.length > 0);
   return measureStrings.map(measure => {
     const groups = [];
     const regex = /\(([^)]+)\)|s:([^\s()]+)|([^\s()]+)/g;
@@ -28,18 +28,18 @@ export function parsePattern(pattern) {
 }
 
 /**
- * Get metadata about a pattern:
- * - totalNotes: total number of notes in the pattern
+ * Get metadata about an exercise:
+ * - totalNotes: total number of notes in the exercise
  * - firstMeasureNotes: notes in the first 2 measures (first line)
  * - letters: array of individual note characters
  * - durations: array of note durations in beats (0.5 for eighth, 1/3 for triplet)
  * - beatPositions: which note indices fall on beat boundaries (for metronome clicks)
- * - hasTriplets: whether this pattern contains any triplets
+ * - hasTriplets: whether this exercise contains any triplets
  * - parsed: the raw parsed structure
- * - measureCount: number of measures in the pattern
+ * - measureCount: number of measures in the exercise
  */
-export function getPatternInfo(pattern) {
-  const parsed = parsePattern(pattern);
+export function getExerciseInfo(exercise) {
+  const parsed = parseExercise(exercise);
 
   let totalNotes = 0;
   let firstMeasureNotes = 0;

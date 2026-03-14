@@ -1,5 +1,5 @@
 // Short Roll Combinations (Double Beat Rolls) from page 11
-// Each measure: 4 eighth-note starting pattern + sixteenth-note double-stroke roll
+// Each measure: 4 eighth-note starting exercise + sixteenth-note double-stroke roll
 // Exercises 1-12: 9-stroke open roll (4 eighths + 8 sixteenths)
 // Exercises 13-24: 7-stroke open roll (4 eighths + 7 sixteenths)
 

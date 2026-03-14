@@ -1,4 +1,4 @@
-// Triplet patterns from page 8 of "Stick Control for the Snare Drummer"
+// Triplet exercises from page 8 of "Stick Control for the Snare Drummer"
 // Format: | separates measures, () marks triplet groups
 // Each bar is in 4/4 time (4 beats per bar)
 // Eighth note group (e.g. rlrl): 4 notes = 2 beats

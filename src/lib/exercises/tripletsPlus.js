@@ -1,4 +1,4 @@
-// Triplets+ patterns from page 9 of "Stick Control for the Snare Drummer"
+// Triplets+ exercises from page 9 of "Stick Control for the Snare Drummer"
 // Progressive exercises that build from eighths+triplets into all-triplets.
 // | separates bars, renderer displays 2 bars per line.
 // Exercises 1-4 and 8-9: 4 bars (2 lines)

@@ -8,8 +8,8 @@ import NotationPreview from './lib/components/NotationPreview';
 import { useStore } from './lib/store';
 
 function App() {
-  const { state, patterns } = useStore();
-  const { currentPattern } = state;
+  const { state, exercises } = useStore();
+  const { currentExercise } = state;
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function App() {
             </div>
             <Metronome />
             <Notation />
-            {currentPattern < patterns.length - 1 && <NotationPreview />}
+            {currentExercise < exercises.length - 1 && <NotationPreview />}
             <Instructions />
           </div>
           <Footer />
