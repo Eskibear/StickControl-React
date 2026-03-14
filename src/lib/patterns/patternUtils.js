@@ -2,22 +2,24 @@
  * Parse a pattern string into structured format.
  *
  * Format: "rlrl (rlr) (lrl) | rlrl (rlr) (lrl)"
- *   | separates measures, () marks triplet groups
+ *   | separates measures, () marks triplet groups, q: marks quarter notes
  *
  * Returns: array of 2 measures, each measure is an array of groups
- * Group: { notes: string, triplet: boolean }
+ * Group: { notes: string, triplet: boolean, quarter: boolean }
  */
 export function parsePattern(pattern) {
   const measureStrings = pattern.split('|').map(s => s.trim());
   return measureStrings.map(measure => {
     const groups = [];
-    const regex = /\(([^)]+)\)|([^\s()]+)/g;
+    const regex = /\(([^)]+)\)|q:([^\s()]+)|([^\s()]+)/g;
     let match;
     while ((match = regex.exec(measure)) !== null) {
       if (match[1]) {
-        groups.push({ notes: match[1], triplet: true });
+        groups.push({ notes: match[1], triplet: true, quarter: false });
       } else if (match[2]) {
-        groups.push({ notes: match[2], triplet: false });
+        groups.push({ notes: match[2], triplet: false, quarter: true });
+      } else if (match[3]) {
+        groups.push({ notes: match[3], triplet: false, quarter: false });
       }
     }
     return groups;
@@ -44,7 +46,7 @@ export function getPatternInfo(pattern) {
 
   parsed.forEach((measure, mIdx) => {
     measure.forEach(group => {
-      const dur = group.triplet ? 1 / 3 : 0.5;
+      const dur = group.triplet ? 1 / 3 : group.quarter ? 1 : 0.5;
       for (const char of group.notes) {
         letters.push(char);
         durations.push(dur);
