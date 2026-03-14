@@ -18,7 +18,7 @@ export default function NotationLetters({ pattern, preview = false, noteXPositio
 
   const letterStyle = (idx) => {
     if (noteXPositions.length > idx) {
-      return { left: `${noteXPositions[idx] - 4}px` };
+      return { left: `${noteXPositions[idx]}px`, transform: 'translateX(-50%)' };
     }
     return {};
   };
