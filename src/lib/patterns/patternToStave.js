@@ -22,18 +22,42 @@ export const patternToStave = (pattern) => {
     const beams = [];
     const tuplets = [];
 
+    let pendingSixteenths = [];
+
+    const flushSixteenths = () => {
+      if (pendingSixteenths.length > 0) {
+        beams.push(pendingSixteenths);
+        pendingSixteenths = [];
+      }
+    };
+
     measure.forEach(group => {
       const notes = [];
       for (const char of group.notes) {
         const note = createNote(char, group.sixteenth);
         notes.push(note);
         allNotes.push(note);
+
+        if (group.sixteenth) {
+          if (char === "_") {
+            // Rest breaks the beam
+            flushSixteenths();
+          } else {
+            pendingSixteenths.push(note);
+          }
+        }
       }
-      beams.push(notes);
+
+      if (!group.sixteenth) {
+        flushSixteenths();
+        beams.push(notes);
+      }
       if (group.triplet) {
         tuplets.push(notes);
       }
     });
+
+    flushSixteenths();
 
     return { allNotes, beams, tuplets };
   });
