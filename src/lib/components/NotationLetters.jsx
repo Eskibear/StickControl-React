@@ -7,7 +7,7 @@ export default function NotationLetters({ pattern, preview = false, noteXPositio
   const { counter, reps, timer } = state;
 
   const info = useMemo(() => getPatternInfo(pattern), [pattern]);
-  const letters = info.letters.map(c => c.toUpperCase());
+  const letters = info.letters.map(c => c === '_' ? '' : c.toUpperCase());
   const totalNotes = info.totalNotes;
 
   const previewClass =

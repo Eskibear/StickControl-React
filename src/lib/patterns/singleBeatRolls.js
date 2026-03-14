@@ -19,16 +19,16 @@ export default [
   "rrrr s:lrlr s:lrlr | llll s:rlrl s:rlrl",           // 12
 
   // Exercises 13-24 (7-stroke open roll, single beat)
-  "rlrl s:rlrl s:rlr | rlrl s:rlrl s:rlr",            // 13
-  "lrlr s:lrlr s:lrl | lrlr s:lrlr s:lrl",            // 14
-  "rrll s:rlrl s:rlr | rrll s:rlrl s:rlr",             // 15
-  "llrr s:lrlr s:lrl | llrr s:lrlr s:lrl",             // 16
-  "rlrr s:lrlr s:lrl | lrll s:rlrl s:rlr",             // 17
-  "rllr s:lrlr s:lrl | lrrl s:rlrl s:rlr",             // 18
-  "rrlr s:lrlr s:lrl | llrl s:rlrl s:rlr",             // 19
-  "rrrl s:rlrl s:rlr | rrrl s:rlrl s:rlr",             // 20
-  "lllr s:lrlr s:lrl | lllr s:lrlr s:lrl",             // 21
-  "rlll s:rlrl s:rlr | rlll s:rlrl s:rlr",             // 22
-  "lrrr s:lrlr s:lrl | lrrr s:lrlr s:lrl",             // 23
-  "rrrr s:lrlr s:lrl | llll s:rlrl s:rlr",             // 24
+  "rlrl s:rlrl s:rlr_ | rlrl s:rlrl s:rlr_",            // 13
+  "lrlr s:lrlr s:lrl_ | lrlr s:lrlr s:lrl_",            // 14
+  "rrll s:rlrl s:rlr_ | rrll s:rlrl s:rlr_",             // 15
+  "llrr s:lrlr s:lrl_ | llrr s:lrlr s:lrl_",             // 16
+  "rlrr s:lrlr s:lrl_ | lrll s:rlrl s:rlr_",             // 17
+  "rllr s:lrlr s:lrl_ | lrrl s:rlrl s:rlr_",             // 18
+  "rrlr s:lrlr s:lrl_ | llrl s:rlrl s:rlr_",             // 19
+  "rrrl s:rlrl s:rlr_ | rrrl s:rlrl s:rlr_",             // 20
+  "lllr s:lrlr s:lrl_ | lllr s:lrlr s:lrl_",             // 21
+  "rlll s:rlrl s:rlr_ | rlll s:rlrl s:rlr_",             // 22
+  "lrrr s:lrlr s:lrl_ | lrrr s:lrlr s:lrl_",             // 23
+  "rrrr s:lrlr s:lrl_ | llll s:rlrl s:rlr_",             // 24
 ]

@@ -6,6 +6,9 @@ import { parsePattern } from "./patternUtils";
 
 function createNote(char, sixteenth) {
   const duration = sixteenth ? "16" : "8";
+  if (char === "_") {
+    return new StaveNote({ keys: ["b/4"], duration: duration + "r" });
+  }
   return char === "r"
     ? new StaveNote({ keys: ["c/5"], duration })
     : new StaveNote({ keys: ["a/4"], duration });
