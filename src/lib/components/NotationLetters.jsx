@@ -9,6 +9,7 @@ export default function NotationLetters({ pattern, preview = false, noteXPositio
   const info = useMemo(() => getPatternInfo(pattern), [pattern]);
   const letters = info.letters.map(c => c === '_' ? '' : c.toUpperCase());
   const totalNotes = info.totalNotes;
+  const lineHeight = 100;
 
   const previewClass =
     (reps.selected && counter > (reps.count - 1) * totalNotes) ||
@@ -18,7 +19,11 @@ export default function NotationLetters({ pattern, preview = false, noteXPositio
 
   const letterStyle = (idx) => {
     if (noteXPositions.length > idx) {
-      return { left: `${noteXPositions[idx]}px`, transform: 'translateX(0%)' };
+      const pos = noteXPositions[idx];
+      if (typeof pos === 'object') {
+        return { left: `${pos.x}px`, top: `${pos.line * lineHeight + lineHeight}px`, transform: 'translateX(0%)' };
+      }
+      return { left: `${pos}px`, transform: 'translateX(0%)' };
     }
     return {};
   };
@@ -38,7 +43,7 @@ export default function NotationLetters({ pattern, preview = false, noteXPositio
 
   return (
     <div
-      className={`absolute top-full w-full ${preview ? previewClass : ''} transition-all`}
+      className={`absolute top-0 w-full h-full ${preview ? previewClass : ''} transition-all`}
     >
       {letters.map((letter, idx) => (
         <p

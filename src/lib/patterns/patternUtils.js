@@ -2,13 +2,14 @@
  * Parse a pattern string into structured format.
  *
  * Format: "rlrl (rlr) (lrl) | rlrl (rlr) (lrl)"
- *   | separates measures, () marks triplet groups, s: marks sixteenth notes
+ *   | separates measures, || separates lines (rows of 2 bars)
+ *   () marks triplet groups, s: marks sixteenth notes
  *
- * Returns: array of 2 measures, each measure is an array of groups
+ * Returns: array of measures, each measure is an array of groups
  * Group: { notes: string, triplet: boolean, sixteenth: boolean }
  */
 export function parsePattern(pattern) {
-  const measureStrings = pattern.split('|').map(s => s.trim());
+  const measureStrings = pattern.split('|').map(s => s.trim()).filter(s => s.length > 0);
   return measureStrings.map(measure => {
     const groups = [];
     const regex = /\(([^)]+)\)|s:([^\s()]+)|([^\s()]+)/g;
@@ -28,13 +29,14 @@ export function parsePattern(pattern) {
 
 /**
  * Get metadata about a pattern:
- * - totalNotes: total number of notes in the 2-bar pattern
- * - firstMeasureNotes: notes in the first measure
+ * - totalNotes: total number of notes in the pattern
+ * - firstMeasureNotes: notes in the first 2 measures (first line)
  * - letters: array of individual note characters
  * - durations: array of note durations in beats (0.5 for eighth, 1/3 for triplet)
  * - beatPositions: which note indices fall on beat boundaries (for metronome clicks)
  * - hasTriplets: whether this pattern contains any triplets
  * - parsed: the raw parsed structure
+ * - measureCount: number of measures in the pattern
  */
 export function getPatternInfo(pattern) {
   const parsed = parsePattern(pattern);
@@ -51,7 +53,7 @@ export function getPatternInfo(pattern) {
         letters.push(char);
         durations.push(dur);
         totalNotes++;
-        if (mIdx === 0) firstMeasureNotes++;
+        if (mIdx < 2) firstMeasureNotes++;
       }
     });
   });
@@ -75,6 +77,7 @@ export function getPatternInfo(pattern) {
     durations,
     beatPositions: [...beatPositions],
     hasTriplets,
-    parsed
+    parsed,
+    measureCount: parsed.length
   };
 }

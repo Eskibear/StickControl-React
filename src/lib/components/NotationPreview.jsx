@@ -17,40 +17,55 @@ export default function NotationPreview() {
     if (!output) return;
     if (currentPattern >= categoryEnd) return;
 
-    // Remove previous VexFlow SVGs
     output.querySelectorAll(':scope > svg').forEach(el => el.remove());
 
+    const measures = patternToStave(patterns[currentPattern + 1]);
+    const lineCount = Math.ceil(measures.length / 2);
+    const lineHeight = 100;
+
     const renderer = new Renderer(output, Renderer.Backends.SVG);
-    renderer.resize(540, 100);
+    renderer.resize(540, lineHeight * lineCount);
     const context = renderer.getContext();
 
-    const staveMeasure1 = new Stave(0, 0, 265);
-    staveMeasure1.setContext(context).draw();
+    const allXPositions = [];
 
-    const staveMeasure2 = new Stave(
-      staveMeasure1.getWidth() + staveMeasure1.getX(),
-      0,
-      265
-    );
-    staveMeasure2.setContext(context).draw();
+    for (let line = 0; line < lineCount; line++) {
+      const m1Idx = line * 2;
+      const m2Idx = line * 2 + 1;
+      const y = line * lineHeight;
 
-    const measures = patternToStave(patterns[currentPattern + 1]);
+      const stave1 = new Stave(0, y, 265);
+      stave1.setContext(context).draw();
 
-    const beamInstances = [];
-    measures.forEach(m => {
-      m.beams.forEach(notes => beamInstances.push(new Beam(notes)));
-      m.tuplets.forEach(notes => beamInstances.push(new Tuplet(notes)));
-    });
+      if (m2Idx < measures.length) {
+        const stave2 = new Stave(stave1.getWidth() + stave1.getX(), y, 265);
+        stave2.setContext(context).draw();
 
-    Formatter.FormatAndDraw(context, staveMeasure1, measures[0].allNotes);
-    Formatter.FormatAndDraw(context, staveMeasure2, measures[1].allNotes);
+        const beamInstances = [];
+        [measures[m1Idx], measures[m2Idx]].forEach(m => {
+          m.beams.forEach(notes => beamInstances.push(new Beam(notes)));
+          m.tuplets.forEach(notes => beamInstances.push(new Tuplet(notes)));
+        });
 
-    beamInstances.forEach(b => b.setContext(context).draw());
+        Formatter.FormatAndDraw(context, stave1, measures[m1Idx].allNotes);
+        Formatter.FormatAndDraw(context, stave2, measures[m2Idx].allNotes);
+        beamInstances.forEach(b => b.setContext(context).draw());
 
-    setNoteXPositions([
-      ...measures[0].allNotes.map(n => n.getAbsoluteX()),
-      ...measures[1].allNotes.map(n => n.getAbsoluteX()),
-    ]);
+        allXPositions.push(...measures[m1Idx].allNotes.map(n => ({ x: n.getAbsoluteX(), line })));
+        allXPositions.push(...measures[m2Idx].allNotes.map(n => ({ x: n.getAbsoluteX(), line })));
+      } else {
+        const beamInstances = [];
+        measures[m1Idx].beams.forEach(notes => beamInstances.push(new Beam(notes)));
+        measures[m1Idx].tuplets.forEach(notes => beamInstances.push(new Tuplet(notes)));
+
+        Formatter.FormatAndDraw(context, stave1, measures[m1Idx].allNotes);
+        beamInstances.forEach(b => b.setContext(context).draw());
+
+        allXPositions.push(...measures[m1Idx].allNotes.map(n => ({ x: n.getAbsoluteX(), line })));
+      }
+    }
+
+    setNoteXPositions(allXPositions);
   }, [currentPattern, patterns, categoryEnd]);
 
   useEffect(() => {
